@@ -1,0 +1,20 @@
+Metadata-Version: 1.1
+Name: VISIBLE
+Version: 0.2.5
+Summary: Matched filtering for interferometric data
+Home-page: https://github.com/AstroChem/VISIBLE
+Author: Ryan Loomis
+Author-email: rloomis@cfa.harvard.edu
+License: MIT
+Description: The matched_filter() method in VISIBLE allows you to apply an approximated matched filter to interferometric spectral line data and extract a signal. 
+            
+Keywords: astronomy science
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Environment :: Console
+Classifier: Intended Audience :: Science/Research
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Topic :: Scientific/Engineering :: Astronomy

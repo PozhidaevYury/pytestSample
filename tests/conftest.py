@@ -54,5 +54,14 @@ def app(browser):
 
 
 @pytest.fixture(scope="session")
+def auth_app(app):
+    app \
+        .login_page() \
+        .open() \
+        .auth()
+    return app
+
+
+@pytest.fixture(scope="session")
 def faker():
     return Faker()

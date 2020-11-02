@@ -37,7 +37,7 @@ def browser(request):
     browser = Browser(
         Config(
             driver=webdriver.Chrome(),
-            base_url=config['base_url'],
+            base_url=config['job_url'],
             timeout=4,
             window_width=int(config['window_width']),
             window_height=int(config['window_height'])

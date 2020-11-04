@@ -3,7 +3,6 @@ from selene import Browser
 from src.pages.CovidPage import CovidPage
 from src.pages.LoginPage import LoginPage
 from src.pages.MainPage import MainPage
-from src.pages.SupportMeasuresPage import SupportMeasuresPage
 
 
 class Application(object):
@@ -19,6 +18,3 @@ class Application(object):
 
     def covid_page(self):
         return CovidPage(self.browser)
-
-    def support_page(self):
-        return SupportMeasuresPage(self.browser)

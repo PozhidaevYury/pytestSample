@@ -26,18 +26,35 @@ def read_ini():
 def get_config(request):
     env_name = request.config.getoption("--env")
     try:
-        return read_ini()[env_name]
+        return env_name, read_ini()[env_name]
     except:
         raise KeyError(f"Wrong command {env_name}")
 
 
+def get_driver(env):
+    if env == "local":
+        return webdriver.Chrome()
+    else:
+        capabilities = {
+            "browserName": "chrome",
+            "browserVersion": "86.0",
+            "selenoid:options": {
+                "enableVNC": True,
+                "enableVideo": False
+            }
+        }
+        return webdriver.Remote(command_executor="http://127.0.0.1:4444/wd/hub",
+                                desired_capabilities=capabilities)
+
+
 @pytest.fixture(scope="session")
 def browser(request):
-    config = get_config(request)
+    env_name,  config = get_config(request)
+
     browser = Browser(
         Config(
-            driver=webdriver.Chrome(),
-            base_url=config['job_url'],
+            driver=get_driver(env_name),
+            base_url=config['base_url'],
             timeout=4,
             window_width=int(config['window_width']),
             window_height=int(config['window_height'])

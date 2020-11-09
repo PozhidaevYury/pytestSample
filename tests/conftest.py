@@ -49,7 +49,7 @@ def get_driver(env):
 
 @pytest.fixture(scope="session")
 def browser(request):
-    env_name,  config = get_config(request)
+    env_name, config = get_config(request)
 
     browser = Browser(
         Config(

@@ -53,7 +53,7 @@ def browser(request):
 
     browser = Browser(
         Config(
-            driver=get_driver(env_name),
+            driver=get_driver(env_nam),
             base_url=config['base_url'],
             timeout=4,
             window_width=int(config['window_width']),

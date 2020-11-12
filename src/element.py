@@ -1,10 +1,9 @@
-from playwright.sync_api import Page
 from selene.support.conditions import have
 
 
 class PlaywrightElement(object):
 
-    def __init__(self, page: Page, locator):
+    def __init__(self, page, locator):
         self.page = page
         self.locator = locator
 
@@ -14,8 +13,8 @@ class PlaywrightElement(object):
     def send_keys(self, text):
         self.page.type(selector=self.locator, text=text)
 
-    def should(self, condition):
-        condition.match(self.page, self.locator)
+    def should(self, text):
+        assert self.page.innerText(self.locator) == text
 
 
 class SeleneElement(object):

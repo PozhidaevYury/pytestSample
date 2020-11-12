@@ -11,4 +11,4 @@ def test_can_edit_episode(auth_app, faker):
         .main_page() \
         .open() \
         .episode_name() \
-        .should(have.text(episode_name))
+        .should(episode_name)

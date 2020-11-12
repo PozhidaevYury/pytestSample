@@ -17,8 +17,8 @@ class LoginPage(BasePage):
     def auth_playwrigth(self):
         self.browser.element("#usernameOrEmail").send_keys("admin")
         self.browser.element("#password").send_keys("123456")
-        self.browser.element("body > app-root > app-layout > div > app-login > div > div > form > div:nth-child(3) > button").click()
-
+        self.browser.element(
+            "body > app-root > app-layout > div > app-login > div > div > form > div:nth-child(3) > button").click()
 
     @allure.step("open login page")
     def open(self):

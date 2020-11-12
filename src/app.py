@@ -1,5 +1,4 @@
-from selene import Browser
-
+from src.browser import Browser
 from src.pages.CovidPage import CovidPage
 from src.pages.LoginPage import LoginPage
 from src.pages.MainPage import MainPage

@@ -4,9 +4,11 @@ import sys
 
 import pytest
 from faker import Faker
-from selene import Browser, Config
 from selenium import webdriver
 from src.app import Application
+from src.browser import Browser
+from src.configuration import Configuration
+from src.engine import PlaywrightEngine, SeleniumEngine
 
 
 def pytest_addoption(parser):
@@ -26,7 +28,13 @@ def read_ini():
 def get_config(request):
     env_name = request.config.getoption("--env")
     try:
-        return env_name, read_ini()[env_name]
+        config = read_ini()[env_name]
+        return Configuration(
+            base_url=config['base_url'],
+            timeout=4,
+            window_width=int(config['window_width']),
+            window_height=int(config['window_height'])
+        )
     except:
         raise KeyError(f"Wrong command {env_name}")
 
@@ -49,25 +57,29 @@ def get_driver(env):
 
 @pytest.fixture(scope="session")
 def browser(request):
-    env_name, config = get_config(request)
+    config = get_config(request)
 
     browser = Browser(
-        Config(
-            driver=get_driver(env_name),
-            base_url=config['base_url'],
-            timeout=4,
-            window_width=int(config['window_width']),
-            window_height=int(config['window_height'])
-        )
+        #   Config(
+        #      driver=get_driver(env_name),
+        #        base_url=config['base_url'],
+        #        timeout=4,
+        #        window_width=int(config['window_width']),
+        #        window_height=int(config['window_height'])
+        #    )
+        # )
+
+        # SeleniumEngine(config)
+        PlaywrightEngine(config)
     )
 
     yield browser
-    browser.close_current_tab()
+    browser.close()
 
 
 @pytest.fixture(scope="session")
 def app(browser):
-    return Application(browser)
+    yield Application(browser)
 
 
 @pytest.fixture(scope="session")
@@ -75,7 +87,7 @@ def auth_app(app):
     app \
         .login_page() \
         .open() \
-        .auth()
+        .auth_playwrigth()
     return app
 
 

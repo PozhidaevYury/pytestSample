@@ -1,5 +1,4 @@
 import allure
-from selene.core.entity import SeleneElement
 
 from src.pages.BasePage import BasePage
 
@@ -19,5 +18,5 @@ class MainPage(BasePage):
         return self.browser.element(".navbar-brand")
 
     @allure.step("return created episode")
-    def episode_name(self) -> SeleneElement:
+    def episode_name(self):
         return self.browser.element("div > ul > li > span")
